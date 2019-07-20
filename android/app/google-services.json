@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "978584337675",
+    "firebase_url": "https://steer-93271.firebaseio.com",
+    "project_id": "steer-93271",
+    "storage_bucket": "steer-93271.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:978584337675:android:f0c22001f5f16832",
+        "android_client_info": {
+          "package_name": "com.steer.steer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "978584337675-97obusdf4e14a72d6l64q69q6tqp6u4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.steer.steer",
+            "certificate_hash": "148bce790d270747dad067c7ce9df3254361ff19"
+          }
+        },
+        {
+          "client_id": "978584337675-qr707hoka6o2hq12n1qmeg1hag8r0g8c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.steer.steer",
+            "certificate_hash": "c0cc2856bee06999f4f5046cf709e2c6a158a83b"
+          }
+        },
+        {
+          "client_id": "978584337675-2kghfqt9nbfe87jtj08ftrgsrknlh62f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv01YCvE4OPhoSolklzxtYMDPH7axVhMQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "978584337675-2kghfqt9nbfe87jtj08ftrgsrknlh62f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
