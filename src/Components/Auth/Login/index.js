@@ -21,6 +21,8 @@ export default () => {
           .signInWithEmailAndPassword(email, pass)
           .then(user => {
             if (user) {
+              console.log("login user", user.user);
+
               actions.setUser(user.user);
               navigate("Home");
             }

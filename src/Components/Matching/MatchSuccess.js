@@ -10,11 +10,30 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
+import firebase from "react-native-firebase";
+import { useGlobal } from "../../GlobalHooks";
 
 export default () => {
   const { navigate } = useNavigation();
   const [num, setNum] = useState(0);
   const [done, setDone] = useState(false);
+  const [state, actions] = useGlobal();
+
+  // const db = firebase.database().ref("instructors");
+
+  // useEffect(() => {
+  //   console.log("reached");
+  //   db.on("value", dataSnap => {
+  //     var instList = [];
+  //     dataSnap.forEach(item => {
+  //       var data = item.val();
+  //       data["key"] = item.key;
+  //       instList.push(data);
+  //     });
+  //     console.log("inst", instList);
+  //     actions.setInstList(instList);
+  //   });
+  // }, []);
 
   const renderBlock = label => {
     return (
@@ -31,15 +50,24 @@ export default () => {
           fill={100}
           tintColor={primaryText}
           duration={2000}
-          onAnimationComplete={() => setNum(num => num + 1)}
+          onAnimationComplete={() => {
+            setNum(num => num + 1);
+            //setCount(true);
+          }}
           backgroundColor={primary}
         >
-          {fill => (
-            <Image
-              source={tick}
-              style={{ width: 15, height: 15, resizeMode: "contain" }}
-            />
-          )}
+          {fill => {
+            if (fill == 100) {
+              return (
+                <Image
+                  source={tick}
+                  style={{ width: 15, height: 15, resizeMode: "contain" }}
+                />
+              );
+            } else {
+              return null;
+            }
+          }}
         </AnimatedCircularProgress>
         <Text
           style={{

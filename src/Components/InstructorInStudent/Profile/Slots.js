@@ -16,7 +16,7 @@ export default ({ date, timeSlots, selected, setSelected, dateText }) => {
           flex: 1,
           flexDirection: "row",
           paddingTop: 20,
-          paddingLeft: 15
+          paddingLeft: 30
         }}
       >
         <Icon
@@ -30,7 +30,8 @@ export default ({ date, timeSlots, selected, setSelected, dateText }) => {
             fontSize: 16,
             color: primary,
             textAlign: "center",
-            marginLeft: 5
+            marginLeft: 5,
+            fontFamily: "Lato-Light"
           }}
         >
           {dateText}
@@ -42,6 +43,7 @@ export default ({ date, timeSlots, selected, setSelected, dateText }) => {
         selected={selected}
         onAdd={onAdd}
         dateText={dateText}
+        len={timeSlots.length}
       />
     </View>
   );

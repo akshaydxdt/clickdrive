@@ -11,7 +11,8 @@ import {
   Title,
   Left,
   Right,
-  Thumbnail
+  Thumbnail,
+  Spinner
 } from "native-base";
 import { View } from "react-native";
 import { useNavigation } from "react-navigation-hooks";
@@ -29,18 +30,22 @@ export default () => {
   const [text, setText] = useState(null);
   const [exp, setExp] = useState(0);
   const [fill, setFill] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  actions.fetchInstructors(db);
 
   //const lock = state.userDetails.profileLock;
   const lock = "id";
   var nav = lock === false ? "InstructorList" : "InstProfile";
 
   useEffect(() => {
-    const id = state.user.uid;
-    firebase
-      .database()
-      .ref("users")
-      .child(id)
-      .on("value", dataSnap => {
+    const db = firebase.database().ref("users");
+    if (state.user) {
+      console.log("home");
+
+      const id = state.user.uid;
+
+      db.child(id).on("value", dataSnap => {
         if (dataSnap.exists()) {
           var data = dataSnap.val();
           var val = data.nextBooking;
@@ -59,8 +64,11 @@ export default () => {
           setText(text);
           setExp(exp);
           setFill(fill);
+          setLoading(false);
         }
       });
+    }
+    return () => db;
   }, []);
 
   // useEffect(() => {
@@ -189,20 +197,29 @@ export default () => {
       </AnimatedCircularProgress>
     </View>
   );
-  return (
-    <Base footer={true}>
-      <UpComing />
-      <Text
-        style={{
-          fontSize: 22,
-          color: primary,
-          fontFamily: "Lato-Bold",
-          marginTop: 28
-        }}
-      >
-        Badges & XP
-      </Text>
-      <ExpPoints />
-    </Base>
-  );
+
+  if (!loading) {
+    return (
+      <Base footer={true}>
+        <UpComing />
+        <Text
+          style={{
+            fontSize: 22,
+            color: primary,
+            fontFamily: "Lato-Bold",
+            marginTop: 28
+          }}
+        >
+          Badges & XP
+        </Text>
+        <ExpPoints />
+      </Base>
+    );
+  } else {
+    return (
+      <Base footer={true}>
+        <Spinner color={primary} style={{ alignSelf: "center" }} />
+      </Base>
+    );
+  }
 };

@@ -1,41 +1,44 @@
 import React from "react";
-import { Item, Input, Button, Col, Text } from "native-base";
+import { Item, Input, Button, Col, Text, Grid } from "native-base";
 import { placeholderLight, primaryText } from "../../../Res/Colors";
 
 export default ({ phoneNumber, dispatch, signIn }) => {
   return (
-    <Col>
-      <Item>
-        <Input
-          style={{ color: "white", fontFamily: "Lato-Regular" }}
-          placeholderTextColor={placeholderLight}
-          placeholder={"Enter your phone number"}
-          value={phoneNumber}
-          onChangeText={value => dispatch({ type: "phInput", data: value })}
-        />
-      </Item>
+    <Grid style={{ alignItems: "center" }}>
+      <Col>
+        <Item>
+          <Input
+            style={{ color: "white", fontFamily: "Lato-Regular" }}
+            placeholderTextColor={placeholderLight}
+            placeholder={"Enter your phone number"}
+            value={phoneNumber}
+            onChangeText={value => dispatch({ type: "phInput", data: value })}
+          />
+        </Item>
 
-      <Button
-        light
-        disabled={phoneNumber ? false : true}
-        bordered
-        style={{
-          marginTop: 35,
-          alignSelf: "stretch",
-          justifyContent: "center",
-          borderRadius: 15
-        }}
-        onPress={signIn}
-      >
-        <Text
+        <Button
+          light
+          disabled={phoneNumber ? false : true}
+          bordered
           style={{
-            color: phoneNumber ? primaryText : placeholderLight,
-            fontFamily: "Lato-Regular"
+            marginTop: 35,
+            alignSelf: "stretch",
+            justifyContent: "center",
+            borderRadius: 15
           }}
+          onPress={signIn}
         >
-          Continue
-        </Text>
-      </Button>
-    </Col>
+          <Text
+            uppercase={false}
+            style={{
+              color: phoneNumber ? primaryText : placeholderLight,
+              fontFamily: "Lato-Regular"
+            }}
+          >
+            Continue
+          </Text>
+        </Button>
+      </Col>
+    </Grid>
   );
 };

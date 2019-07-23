@@ -149,7 +149,7 @@ export default (variables /*: * */ = variable) => {
       },
       ".disabled": {
         backgroundColor: null,
-        borderColor: variables.btnDisabledBg,
+        borderColor: "rgba(255, 255, 255, 0.6)",
         borderWidth: variables.borderWidth * 2,
         "NativeBase.Text": {
           color: variables.btnDisabledBg
@@ -304,7 +304,7 @@ export default (variables /*: * */ = variable) => {
     ".large": {
       height: 60,
       "NativeBase.Text": {
-        fontSize: 22,
+        fontSize: 22
       }
     },
 

@@ -82,9 +82,17 @@ export default ({
   };
 
   return (
-    <Grid style={styles.gridPad}>
-      <Row>
-        <Text style={{ color: primaryText, fontFamily: "Lato-Regular" }}>
+    <Grid>
+      <Row style={{ alignItems: "center" }}>
+        <Text
+          style={{
+            color: primaryText,
+            fontFamily: "Lato-Regular",
+            textAlign: "center",
+            alignContent: "center",
+            width: "100%"
+          }}
+        >
           Enter the code sent to {email}
         </Text>
       </Row>
@@ -97,7 +105,8 @@ export default ({
             style={{
               alignSelf: "stretch",
               justifyContent: "center",
-              borderRadius: 15
+              borderRadius: 15,
+              marginTop: 25
             }}
             onPress={confirmCode}
           >
@@ -110,14 +119,16 @@ export default ({
           </Button>
         </Col>
       </Row>
-      <Col style={{ alignSelf: "stretch", alignItems: "center" }}>
+      <Col
+        style={{ alignSelf: "stretch", alignItems: "center", marginTop: 25 }}
+      >
         <Row>
           <Button hasText transparent>
             <Text
               uppercase={false}
               style={{ color: primaryText, fontFamily: "Lato-Regular" }}
             >
-              Resend
+              I didn’t receive a code
             </Text>
           </Button>
         </Row>

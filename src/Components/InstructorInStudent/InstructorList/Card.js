@@ -14,20 +14,31 @@ import {
 import { primary, primaryText, borderColor } from "../../../Res/Colors";
 import guy from "../../../Res/guy.jpg";
 import { useNavigation } from "react-navigation-hooks";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
-export default ({ name, onSelect, onCancel }) => {
+export default ({ name, desc, onSelect, onCancel }) => {
   const [active, setActive] = useState(false);
+  const [cancel, setCancel] = useState(false);
 
   //const { navigate } = useNavigation()
 
   useEffect(() => {
+    const timer = null;
     if (active) {
-      const timer = setTimeout(() => {
+      timer = setTimeout(() => {
         onSelect();
       }, 500);
       return () => clearTimeout(timer);
+    } else {
+      timer = setTimeout(() => {
+        onCancel();
+      }, 500);
+      return () => clearTimeout(timer);
     }
-  }, [active]);
+  }, [active, cancel]);
 
   return (
     <Container
@@ -36,6 +47,8 @@ export default ({ name, onSelect, onCancel }) => {
         borderColor: primary,
         elevation: 0,
         borderWidth: 2,
+        width: wp("80%"),
+        maxWidth: 300,
         maxHeight: 430
       }}
     >
@@ -64,9 +77,7 @@ export default ({ name, onSelect, onCancel }) => {
             marginTop: 45
           }}
         >
-          aka Baby Driver. Driving instructor by day, dad of two punks by
-          evening and a surfer by weekend. Lambo is my favourite, but we will
-          start in my Volkswagen Polo.
+          {desc}
         </Text>
       </Content>
       <View style={{ height: 2, backgroundColor: borderColor }} />
@@ -91,13 +102,13 @@ export default ({ name, onSelect, onCancel }) => {
         >
           <Button
             onPress={() => {
-              onCancel();
+              setCancel(true);
             }}
           >
             <Icon
               type="AntDesign"
               name="close"
-              style={{ color: borderColor, fontSize: 36 }}
+              style={{ color: cancel ? primary : borderColor, fontSize: 36 }}
             />
           </Button>
           <Button

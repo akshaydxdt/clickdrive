@@ -111,8 +111,9 @@ export default () => {
         light
         bordered
         style={{
-          marginTop: 25,
-          alignSelf: "stretch",
+          marginBottom: 20,
+          width: "100%",
+          alignSelf: "flex-end",
           justifyContent: "center",
           borderRadius: 15
         }}
@@ -120,6 +121,7 @@ export default () => {
       >
         <Text
           style={{
+            fontSize: 18,
             color: active ? primaryText : placeholderLight,
             fontFamily: "Lato-Regular"
           }}

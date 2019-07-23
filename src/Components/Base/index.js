@@ -19,6 +19,10 @@ import avatar from "../../Res/userW.png";
 import { primary, primaryText } from "../../Res/Colors";
 import { useNavigation } from "react-navigation-hooks";
 import textLogo from "../../Res/textLogo.png";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 export default ({ children, footer }) => {
   const { navigate } = useNavigation();
@@ -29,7 +33,7 @@ export default ({ children, footer }) => {
         noShadow
         style={{
           backgroundColor: primary,
-          height: 89,
+          height: hp("10.9%"),
           paddingLeft: 33,
           paddingRight: 12
         }}
@@ -56,7 +60,9 @@ export default ({ children, footer }) => {
           borderTopRightRadius: 40,
           backgroundColor: primaryText,
           flex: 1,
-          padding: 33
+          paddingRight: wp("6.6%"),
+          paddingLeft: wp("6.6%"),
+          paddingTop: wp("6.6%")
         }}
       >
         {children}
@@ -73,7 +79,7 @@ export default ({ children, footer }) => {
             </Button>
             <Button
               onPress={() => {
-                navigate("InstProfile");
+                navigate("Matching");
               }}
             >
               <Icon

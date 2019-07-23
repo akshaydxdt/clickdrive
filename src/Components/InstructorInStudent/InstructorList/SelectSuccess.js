@@ -23,12 +23,13 @@ export default () => {
         justifyContent: "center",
         alignItems: "center",
         flex: 1,
+        padding: 28,
         backgroundColor: primary
       }}
     >
       <Text
         style={{
-          fontSize: 25,
+          fontSize: 20,
           color: "white",
           fontFamily: "Lato-Regular",
           marginBottom: 25,

@@ -5,6 +5,7 @@ import { primary, primaryText, placeholderLight } from "../../../Res/Colors";
 import { useNavigation } from "react-navigation-hooks";
 import { useGlobal } from "../../../GlobalHooks";
 import { passwordValidation } from "../../../Utils";
+import CommonLayout from "../../CommonLayout";
 
 export default () => {
   const [pass, setPass] = useState("");
@@ -42,60 +43,74 @@ export default () => {
 
     // }
   };
+  // return (
+  //   <View
+  //     style={{
+  //       flex: 1,
+  //       justifyContent: "center",
+  //       alignItems: "center",
+  //       backgroundColor: primary,
+  //       padding: 30
+  //     }}
+  //   >
+
+  //   </View>
+  // );
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: primary,
-        padding: 30
-      }}
-    >
-      <Item style={{ marginTop: 40 }}>
-        <Input
-          secureTextEntry={true}
-          placeholder="Enter your Password"
-          placeholderTextColor={placeholderLight}
-          style={{ fontFamily: "Lato-Regular", color: primaryText }}
-          onChangeText={value => {
-            setPass(value);
-          }}
-        />
-      </Item>
-      <Item style={{ marginTop: 40 }}>
-        <Input
-          secureTextEntry={true}
-          placeholder="Confirm your Password"
-          placeholderTextColor={placeholderLight}
-          style={{ fontFamily: "Lato-Regular", color: primaryText }}
-          onChangeText={value => {
-            setConfPass(value);
-          }}
-        />
-      </Item>
-      <Button
-        disabled={pass != "" ? false : true}
-        light
-        bordered
+    <CommonLayout>
+      <View
         style={{
-          marginTop: 40,
-          alignSelf: "stretch",
+          felx: 1,
           justifyContent: "center",
-          borderRadius: 15
+          alignItems: "center",
+          height: "100%"
         }}
-        onPress={onContinue}
       >
-        <Text
-          uppercase={false}
+        <Item style={{ marginTop: 30 }}>
+          <Input
+            secureTextEntry={true}
+            placeholder="Enter your Password"
+            placeholderTextColor={placeholderLight}
+            style={{ fontFamily: "Lato-Regular", color: primaryText }}
+            onChangeText={value => {
+              setPass(value);
+            }}
+          />
+        </Item>
+        <Item style={{ marginTop: 30 }}>
+          <Input
+            secureTextEntry={true}
+            placeholder="Confirm your Password"
+            placeholderTextColor={placeholderLight}
+            style={{ fontFamily: "Lato-Regular", color: primaryText }}
+            onChangeText={value => {
+              setConfPass(value);
+            }}
+          />
+        </Item>
+        <Button
+          disabled={pass != "" ? false : true}
+          light
+          bordered
           style={{
-            color: pass != "" ? primaryText : placeholderLight,
-            fontSize: 20
+            marginTop: 30,
+            alignSelf: "stretch",
+            justifyContent: "center",
+            borderRadius: 15
           }}
+          onPress={onContinue}
         >
-          Continue
-        </Text>
-      </Button>
-    </View>
+          <Text
+            uppercase={false}
+            style={{
+              color: pass != "" ? primaryText : placeholderLight,
+              fontSize: 20
+            }}
+          >
+            Continue
+          </Text>
+        </Button>
+      </View>
+    </CommonLayout>
   );
 };

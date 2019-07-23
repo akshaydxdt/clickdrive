@@ -19,10 +19,13 @@ export const instructorActions = {
   setLinkID: (store, linkId) => {
     store.setState({ linkId });
   },
-  fetchInstructors: (store, ref) => {
+  setInstList: (store, instList) => {
+    store.setState({ instList });
+  },
+  fetchInstructors: (store, db) => {
     useEffect(() => {
       console.log("reacheds");
-      ref.on("value", dataSnap => {
+      db.ref("instructors").on("value", dataSnap => {
         var instList = [];
         dataSnap.forEach(item => {
           var data = item.val();
@@ -32,6 +35,6 @@ export const instructorActions = {
         console.log("inst", instList);
         store.setState({ instList });
       });
-    }, []);
+    }, [db]);
   }
 };

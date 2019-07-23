@@ -13,14 +13,6 @@ export default ({ state, actions, setMode }) => {
           onChangeText={value => actions.setFirst(value)}
         />
       </Item>
-      <Item>
-        <Input
-          style={{ color: "white", fontFamily: "Lato-Regular" }}
-          placeholderTextColor={placeholderLight}
-          placeholder={"Last Name"}
-          onChangeText={value => actions.setLast(value)}
-        />
-      </Item>
 
       <Button
         light
@@ -33,7 +25,7 @@ export default ({ state, actions, setMode }) => {
           borderRadius: 15
         }}
         onPress={() => {
-          setMode("place");
+          setMode("last");
         }}
       >
         <Text

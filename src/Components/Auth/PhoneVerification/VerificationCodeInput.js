@@ -39,7 +39,7 @@ export default ({ codeInput, timer, signIn, confirmCode, dispatch }) => {
           <Input
             style={[
               styles.inputRadius,
-              { color: placeholderLight, fontFamily: "Lato-Regular" }
+              { color: primaryText, fontFamily: "Lato-Regular" }
             ]}
             keyboardType="numeric"
             onChangeText={v => focusNext(j, v)}
@@ -68,12 +68,15 @@ export default ({ codeInput, timer, signIn, confirmCode, dispatch }) => {
   };
 
   return (
-    <Grid style={styles.gridPad}>
-      <Row>
+    <Grid>
+      <Row style={{ alignItems: "center" }}>
         <Text
           style={{
             color: "white",
-            fontFamily: "Lato-Regular"
+            fontFamily: "Lato-Regular",
+            textAlign: "center",
+            alignContent: "center",
+            width: "100%"
           }}
         >
           Enter the code you received via SMS
@@ -88,7 +91,8 @@ export default ({ codeInput, timer, signIn, confirmCode, dispatch }) => {
             style={{
               alignSelf: "stretch",
               justifyContent: "center",
-              borderRadius: 15
+              borderRadius: 15,
+              marginTop: 25
             }}
             onPress={confirmCode}
           >
@@ -104,7 +108,7 @@ export default ({ codeInput, timer, signIn, confirmCode, dispatch }) => {
           </Button>
         </Col>
       </Row>
-      <Row>
+      <Row style={{ marginTop: 25 }}>
         <Col>
           {timer === 0 ? (
             <Button
@@ -119,8 +123,9 @@ export default ({ codeInput, timer, signIn, confirmCode, dispatch }) => {
                   color: "white",
                   fontFamily: "Lato-Regular"
                 }}
+                uppercase={false}
               >
-                Resend
+                I didn’t receive a code
               </Text>
             </Button>
           ) : (

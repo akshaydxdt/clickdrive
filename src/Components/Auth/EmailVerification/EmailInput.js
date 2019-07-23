@@ -1,5 +1,14 @@
 import React, { useState } from "react";
-import { Item, Input, Button, Col, Text, Toast, Spinner } from "native-base";
+import {
+  Item,
+  Input,
+  Button,
+  Col,
+  Text,
+  Toast,
+  Spinner,
+  Grid
+} from "native-base";
 import { primaryText, placeholderLight } from "../../../Res/Colors";
 import { emailValidation } from "./../../../Utils/index";
 
@@ -47,43 +56,45 @@ export default ({ email, setEmail, setMode, setServerOTP }) => {
     }
   };
   return (
-    <Col>
-      <Item>
-        <Input
-          style={{ color: primaryText, fontFamily: "Lato-Regular" }}
-          placeholderTextColor={placeholderLight}
-          placeholder={"Enter your email ID"}
-          value={email}
-          onChangeText={value => setEmail(value)}
-        />
-      </Item>
+    <Grid style={{ alignItems: "center" }}>
+      <Col>
+        <Item>
+          <Input
+            style={{ color: primaryText, fontFamily: "Lato-Regular" }}
+            placeholderTextColor={placeholderLight}
+            placeholder={"Enter your email ID"}
+            value={email}
+            onChangeText={value => setEmail(value)}
+          />
+        </Item>
 
-      <Button
-        light
-        bordered
-        disabled={email ? false : true}
-        style={{
-          marginTop: 40,
-          alignSelf: "stretch",
-          justifyContent: "center",
-          borderRadius: 15
-        }}
-        onPress={onNext}
-      >
-        {spin ? (
-          <Spinner color={primaryText} />
-        ) : (
-          <Text
-            style={{
-              color: email ? primaryText : placeholderLight,
-              fontFamily: "Lato-Regular"
-            }}
-            uppercase={false}
-          >
-            Continue
-          </Text>
-        )}
-      </Button>
-    </Col>
+        <Button
+          light
+          bordered
+          disabled={email ? false : true}
+          style={{
+            marginTop: 40,
+            alignSelf: "stretch",
+            justifyContent: "center",
+            borderRadius: 15
+          }}
+          onPress={onNext}
+        >
+          {spin ? (
+            <Spinner color={primaryText} />
+          ) : (
+            <Text
+              style={{
+                color: email ? primaryText : placeholderLight,
+                fontFamily: "Lato-Regular"
+              }}
+              uppercase={false}
+            >
+              Continue
+            </Text>
+          )}
+        </Button>
+      </Col>
+    </Grid>
   );
 };

@@ -19,6 +19,7 @@ import PhoneNumberInput from "./PhoneNumberInput";
 import VerificationCodeInput from "./VerificationCodeInput";
 import successImageUri from "../../../Res/success.png";
 import { primary } from "../../../Res/Colors";
+import CommonLayout from "../../CommonLayout";
 
 const initialState = {
   user: null,
@@ -88,103 +89,118 @@ export default () => {
     auth.signOut();
   }, []);
 
-  useEffect(() => {
-    if (active) {
-      const unsubscribe = auth.onAuthStateChanged(user => {
-        if (user) {
-          console.log("auth", user);
+  //production code
 
-          actions.setUser(user);
-          dispatch({ type: "setMsg", data: "Code Confirmed!" });
-          //navigate("Personalinfo");
-          //setMode("success");
-          actions.setMobile(state.phoneNumber);
-          if (from === "fb") {
-            navigate("DOB");
-          } else {
-            navigate("EmailVerification");
-          }
-        }
-      });
+  // useEffect(() => {
+  //   if (active) {
+  //     const unsubscribe = auth.onAuthStateChanged(user => {
+  //       if (user) {
+  //         console.log("auth", user);
 
-      return () => unsubscribe();
-    }
-  }, [active]);
+  //         actions.setUser(user);
+  //         dispatch({ type: "setMsg", data: "Code Confirmed!" });
+  //         //navigate("Personalinfo");
+  //         //setMode("success");
+  //         actions.setMobile(state.phoneNumber);
+  //         if (from === "fb") {
+  //           navigate("DOB");
+  //         } else {
+  //           navigate("EmailVerification");
+  //         }
+  //       }
+  //     });
+
+  //     return () => unsubscribe();
+  //   }
+  // }, [active]);
 
   const signIn = () => {
     const { phoneNumber } = state;
     console.log("ph", phoneNumber);
     dispatch({ type: "setMsg", data: "Sending code ..." });
 
-    auth
-      .signInWithPhoneNumber(phoneNumber)
-      .then(confirmResult => {
-        dispatch({ type: "setResult", data: confirmResult });
-        console.log("confirm", confirmResult);
+    // auth
+    //   .signInWithPhoneNumber(phoneNumber)
+    //   .then(confirmResult => {
+    //     dispatch({ type: "setResult", data: confirmResult });
+    //     console.log("confirm", confirmResult);
 
-        dispatch({ type: "setMsg", data: "Code has been sent!" });
-        setMode("codeInput");
-        setTimer(60);
-        // /countdownTimer(); //might need to be added as a callback
-      })
-      .catch(error =>
-        dispatch({
-          type: "setMsg",
-          data: `Sign In With Phone Number Error: ${error.message}`
-        })
-      );
+    //     dispatch({ type: "setMsg", data: "Code has been sent!" });
+    //     setMode("codeInput");
+    //     setTimer(60);
+    //     // /countdownTimer(); //might need to be added as a callback
+    //   })
+    //   .catch(error =>
+    //     dispatch({
+    //       type: "setMsg",
+    //       data: `Sign In With Phone Number Error: ${error.message}`
+    //     })
+    //   );
 
-    // dispatch({ type: "setMsg", data: "Code has been sent!" });
-    // setMode("codeInput");
-    // setTimer(60);
+    //code for testing
+    dispatch({ type: "setMsg", data: "Code has been sent!" });
+    setMode("codeInput");
+    setTimer(60);
   };
 
   const confirmCode = () => {
     const { codeInput, confirmResult, changeNumber } = state;
 
     console.log("state", state);
-    // if (codeInput === "545121") {
-    //   dispatch({ type: "setMsg", data: "Code Confirmed!" });
+    //code for testing
+    if (codeInput === "545121") {
+      dispatch({ type: "setMsg", data: "Code Confirmed!" });
 
-    //   setMode("success");
-    // }
+      if (from === "fb") {
+        navigate("DOB");
+      } else {
+        navigate("EmailVerification");
+      }
+    } else {
+      Toast.show({
+        text: "Invalid Code",
+        duration: 2000
+      });
+    }
 
     // const credential = firebase.auth.PhoneAuthProvider.credential(
     //   confirmResult.verificationId,
     //   codeInput
     // );
 
-    if (confirmResult && codeInput.length > 0) {
-      if (!changeNumber) {
-        //firebase.auth().signInWithCredential(credential);
-        console.log("code", codeInput);
-        setActive(true);
-        confirmResult
-          .confirm(codeInput)
-          .then(user => {
-            console.log("user", user);
-            // actions.setUser(user);
-            // dispatch({ type: "setMsg", data: "Code Confirmed!" });
-            // //navigate("Personalinfo");
-            // //setMode("success");
-            // actions.setMobile(state.phoneNumber);
-            // if (from === "fb") {
-            //   navigate("DOB");
-            // } else {
-            //   navigate("EmailVerification");
-            // }
-          })
-          .catch(error => {
-            console.log("error", error);
+    //production code
 
-            dispatch({
-              type: "setMsg",
-              data: `Code Confirm Error: ${error.message}`
-            });
-          });
-      } else {
-      }
-    }
+    // if (confirmResult && codeInput.length > 0) {
+    //   if (!changeNumber) {
+    //     //firebase.auth().signInWithCredential(credential);
+    //     console.log("code", codeInput);
+    //     setActive(true);
+    //     confirmResult
+    //       .confirm(codeInput)
+    //       .then(user => {
+    //         console.log("user", user);
+    //         // actions.setUser(user);
+    //         // dispatch({ type: "setMsg", data: "Code Confirmed!" });
+    //         // //navigate("Personalinfo");
+    //         // //setMode("success");
+    //         // actions.setMobile(state.phoneNumber);
+    //         // if (from === "fb") {
+    //         //   navigate("DOB");
+    //         // } else {
+    //         //   navigate("EmailVerification");
+    //         // }
+    //       })
+    //       .catch(error => {
+    //         console.log("error", error);
+
+    //         dispatch({
+    //           type: "setMsg",
+    //           data: `Code Confirm Error: ${error.message}`
+    //         });
+    //       });
+    //   } else {
+    //   }
+    // }
   };
 
   const signOut = () => {
@@ -384,20 +400,5 @@ export default () => {
     }
   };
 
-  return (
-    <Container style={styles.container}>
-      <Content contentContainerStyle={{ flex: 1 }} style={{ padding: 15 }}>
-        <Grid style={{ alignItems: "center" }}>
-          {/* {renderMessage()} */}
-          {mainRender()}
-        </Grid>
-      </Content>
-    </Container>
-  );
+  return <CommonLayout>{mainRender()}</CommonLayout>;
 };
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: primary
-  }
-});

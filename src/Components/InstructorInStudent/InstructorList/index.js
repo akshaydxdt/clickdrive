@@ -16,29 +16,34 @@ import Card from "./Card";
 import { primary } from "../../../Res/Colors";
 
 export default () => {
-  const [instList, setInstList] = useState([]);
+  //const [instList, setInstList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeKey, setActiveKey] = useState(0);
   const [state, actions] = useGlobal();
   const { navigate } = useNavigation();
+  const instList = state.instList;
 
-  const db = firebase.database().ref("instructors");
+  const db = firebase.database();
 
-  useEffect(() => {
-    console.log("reached");
-    db.on("value", dataSnap => {
-      var instList = [];
-      dataSnap.forEach(item => {
-        var data = item.val();
-        data["key"] = item.key;
-        instList.push(data);
-      });
-      console.log("inst", instList);
-      setInstList(instList);
+  if (!instList) {
+    actions.fetchInstructors(db);
+  }
 
-      setLoading(false);
-    });
-  }, []);
+  // useEffect(() => {
+  //   console.log("reached");
+  //   db.on("value", dataSnap => {
+  //     var instList = [];
+  //     dataSnap.forEach(item => {
+  //       var data = item.val();
+  //       data["key"] = item.key;
+  //       instList.push(data);
+  //     });
+  //     console.log("inst", instList);
+  //     setInstList(instList);
+
+  //     setLoading(false);
+  //   });
+  // }, []);
 
   const getData = async () => {
     var snap = await db.on("value", snapShot => {
@@ -76,7 +81,9 @@ export default () => {
 
   return (
     <Base footer={false}>
-      <View style={{ flex: 1 }}>
+      <View
+        style={{ flex: 1, alignItems: "center", justifyContent: "center " }}
+      >
         {/* {loading ? (
           <Spinner color={primary} />
         ) : (
@@ -92,12 +99,13 @@ export default () => {
             )}
           />
         )} */}
-        {loading ? (
+        {instList.length < 1 ? (
           <Spinner color={primary} />
         ) : (
           <Card
             data={item}
             name={item.firstName + " " + item.lastName}
+            desc={item.description}
             onCancel={onCancel}
             onSelect={() => {
               onSelect(item);

@@ -6,40 +6,65 @@ import a3 from "../../Res/match/3.jpg";
 import a4 from "../../Res/match/4.jpg";
 import a5 from "../../Res/match/5.jpg";
 import a6 from "../../Res/match/6.jpg";
-
+import { Image } from "react-native";
 import { primary, placeholderLight, primaryText } from "../../Res/Colors";
 import Base from "../Base";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  TouchableOpacity,
+  TouchableWithoutFeedback
+} from "react-native-gesture-handler";
 import { useNavigation } from "react-navigation-hooks";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp
+} from "react-native-responsive-screen";
 
 const getArray = () => {
   return [a1, a2, a3, a4, a5, a6];
 };
+var scale = wp("28%");
+console.log("width", wp("100%"), hp("100%"));
 
-const Circle = ({ item, setValue }) => {
-  const [active, setActive] = useState(false);
-
-  return (
-    <TouchableOpacity
-      onPress={() => {
-        setActive(active => !active);
-      }}
-    >
-      <Thumbnail
-        source={item}
-        large
-        style={{
-          borderWidth: 4,
-          borderColor: active ? primary : placeholderLight
-        }}
-      />
-    </TouchableOpacity>
-  );
-};
+//Math.min(wp("40%"), hp("22%"));
 
 export default () => {
-  const [values, setValue] = useState(null);
+  const [values, setValue] = useState([]);
   const { navigate } = useNavigation();
+
+  const Circle = ({ item, setValue }) => {
+    const [active, setActive] = useState(false);
+    var data = values;
+    return (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          setActive(active => !active);
+          if (active) {
+            data.push(item);
+            setValue(data);
+          }
+        }}
+      >
+        {/* <Thumbnail
+          source={item}
+          large
+          style={{
+            borderWidth: 4,
+            borderColor: active ? primary : placeholderLight
+          }}
+        /> */}
+        <Image
+          source={item}
+          style={{
+            width: scale,
+            height: scale,
+            borderRadius: scale / 2,
+            borderWidth: 4,
+            borderColor: active ? primary : placeholderLight
+          }}
+        />
+      </TouchableWithoutFeedback>
+    );
+  };
 
   const years = getArray();
 
@@ -72,11 +97,17 @@ export default () => {
 
   //render main grid
   return (
-    <View style={{ flex: 1 }}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "space-between",
+        marginBottom: 50
+      }}
+    >
       <View>
         <Text
           style={{
-            fontSize: 22,
+            fontSize: wp("5.8%"),
             color: primary,
             fontFamily: "Lato-Bold"
           }}
@@ -86,9 +117,9 @@ export default () => {
         <Text
           style={{
             fontWeight: "normal",
-            fontSize: 20,
+            fontSize: wp("5.5%"),
             color: primary,
-            marginTop: 10,
+            marginTop: 8,
             fontFamily: "Lato-Light"
           }}
         >
@@ -99,7 +130,7 @@ export default () => {
 
       <View
         style={{
-          paddingTop: 12
+          marginTop: 10
         }}
       >
         {renderGrid()}
@@ -108,6 +139,7 @@ export default () => {
         <Button
           style={{
             backgroundColor: primary,
+
             borderRadius: 14,
             height: 35,
             alignSelf: "stretch",
@@ -120,7 +152,12 @@ export default () => {
             navigate("MatchSuccess");
           }}
         >
-          <Text style={{ color: primaryText }} uppercase={false}>
+          <Text
+            style={{
+              color: primaryText
+            }}
+            uppercase={false}
+          >
             Confirm
           </Text>
         </Button>

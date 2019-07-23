@@ -5,6 +5,7 @@ import { primary } from "../../../Res/Colors";
 import EmailCodeInput from "./EmailCodeInput";
 import { useNavigation } from "react-navigation-hooks";
 import { useGlobal } from "../../../GlobalHooks";
+import CommonLayout from "../../CommonLayout";
 
 export default () => {
   const { navigate } = useNavigation();
@@ -59,11 +60,5 @@ export default () => {
         );
     }
   };
-  return (
-    <Container style={{ backgroundColor: primary }}>
-      <Content contentContainerStyle={{ flex: 1 }} style={{ padding: 15 }}>
-        <Grid style={{ alignItems: "center" }}>{mainRender()}</Grid>
-      </Content>
-    </Container>
-  );
+  return <CommonLayout>{mainRender()}</CommonLayout>;
 };
