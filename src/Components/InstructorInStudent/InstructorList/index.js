@@ -25,46 +25,29 @@ export default () => {
 
   const db = firebase.database();
 
-  if (!instList) {
-    actions.fetchInstructors(db);
-  }
+  actions.fetchInstructors(db);
 
-  // useEffect(() => {
-  //   console.log("reached");
-  //   db.on("value", dataSnap => {
-  //     var instList = [];
-  //     dataSnap.forEach(item => {
-  //       var data = item.val();
-  //       data["key"] = item.key;
-  //       instList.push(data);
-  //     });
-  //     console.log("inst", instList);
-  //     setInstList(instList);
-
-  //     setLoading(false);
+  // const getData = async () => {
+  //   var snap = await db.on("value", snapShot => {
+  //     return snapShot.val();
   //   });
-  // }, []);
+  //   console.log("inst", snap);
+  //   var inst = [];
+  //   snap.forEach(item => {
+  //     var data = item.val();
+  //     data["key"] = item.key;
+  //     inst.push(data);
+  //   });
+  //   console.log("inst", inst);
 
-  const getData = async () => {
-    var snap = await db.on("value", snapShot => {
-      return snapShot.val();
-    });
-    console.log("inst", snap);
-    var inst = [];
-    snap.forEach(item => {
-      var data = item.val();
-      data["key"] = item.key;
-      inst.push(data);
-    });
-    console.log("inst", inst);
-
-    setInstructors(inst);
-  };
+  //   setInstructors(inst);
+  // };
 
   const onSelect = inst => {
     actions.setInstDetails(inst);
     navigate("SelectSuccess");
   };
+
   const onCancel = () => {
     setActiveKey(key => {
       var newKey = key + 1;
@@ -77,6 +60,7 @@ export default () => {
       }
     });
   };
+
   const item = instList[activeKey];
 
   return (
@@ -115,20 +99,4 @@ export default () => {
       </View>
     </Base>
   );
-  // return (
-  //   <Content>
-  //     <List>
-  //       {instList.map(item => (
-  //         <ListItem
-  //           key={item.mobile}
-  //           onPress={() => {
-  //             onSelect(item);
-  //           }}
-  //         >
-  //           <Text>{item.firstName}</Text>
-  //         </ListItem>
-  //       ))}
-  //     </List>
-  //   </Content>
-  // );
 };

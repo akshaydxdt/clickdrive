@@ -3,7 +3,7 @@ import { useEffect } from "react";
 export const instructorState = {
   instDetails: null,
   linkId: null,
-  instList: []
+  instList: null
 };
 
 export const instructorActions = {
@@ -24,17 +24,19 @@ export const instructorActions = {
   },
   fetchInstructors: (store, db) => {
     useEffect(() => {
-      console.log("reacheds");
-      db.ref("instructors").on("value", dataSnap => {
-        var instList = [];
-        dataSnap.forEach(item => {
-          var data = item.val();
-          data["key"] = item.key;
-          instList.push(data);
+      if (store.instList == null) {
+        console.log("reached");
+        db.ref("instructors").on("value", dataSnap => {
+          var instList = [];
+          dataSnap.forEach(item => {
+            var data = item.val();
+            data["key"] = item.key;
+            instList.push(data);
+          });
+          console.log("inst", instList);
+          store.setState({ instList });
         });
-        console.log("inst", instList);
-        store.setState({ instList });
-      });
+      }
     }, [db]);
   }
 };

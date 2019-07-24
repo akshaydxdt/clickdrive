@@ -16,6 +16,8 @@ export default () => {
   actions.checkUser(auth);
   const { navigate } = useNavigation();
 
+  actions.fetchInstructors();
+
   // useEffect(() => {
   //   console.log("changed");
   //   if (loading_login != null && !loading_login) {
