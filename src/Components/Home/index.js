@@ -34,6 +34,8 @@ export default () => {
 
   actions.fetchInstructors(db);
 
+  //Profile lock is used for existing students onboarded by the instructors
+
   //const lock = state.userDetails.profileLock;
   const lock = "id";
   var nav = lock === false ? "InstructorList" : "InstProfile";
@@ -41,6 +43,7 @@ export default () => {
   useEffect(() => {
     const db = firebase.database().ref("users");
     if (state.user) {
+      //fetching data for already existing users
       console.log("home");
 
       const id = state.user.uid;
@@ -70,6 +73,8 @@ export default () => {
     }
     return () => db;
   }, []);
+
+  //========If profile lock is active, function to fetch the details for the specific instructor=====
 
   // useEffect(() => {
   //   if (lock != false) {

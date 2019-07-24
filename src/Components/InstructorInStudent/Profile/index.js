@@ -5,6 +5,8 @@ import InnerContent from "./InnerContent";
 import Base from "../../Base";
 import { Button } from "native-base";
 
+//================checking if it's a first lesson============
+
 // export default () => {
 //   const [state] = useGlobal();
 //   const { firstName, lastName } = state.instDetails;

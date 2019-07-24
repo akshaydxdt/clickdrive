@@ -6,9 +6,10 @@ import { Share } from "react-native";
 export default () => {
   const [state] = useGlobal();
   // const uid = state.user.uid;
-  const uniqueLink = "https://steer.page.link/book/" + "abcdefghijklmnopqrstuv";
+  const uniqueLink = "https://steer.page.link/book/" + "abcdefghijklmnopqrstuv"; //replace this part with the UID of the instructor
 
   const onShare = async () => {
+    //Sharing functionality
     try {
       const result = await Share.share({
         message: uniqueLink

@@ -1,24 +1,11 @@
 import React, { useState, useEffect, useReducer } from "react";
-import { StyleSheet, View, TextInput, Image } from "react-native";
+import { View, TextInput } from "react-native";
 import firebase from "react-native-firebase";
 import { useNavigation, useNavigationParam } from "react-navigation-hooks";
 import { useGlobal } from "../../../GlobalHooks";
-import {
-  Container,
-  Content,
-  Item,
-  Input,
-  Button,
-  Grid,
-  Col,
-  Text,
-  Toast,
-  Root
-} from "native-base";
+import { Button, Text, Toast } from "native-base";
 import PhoneNumberInput from "./PhoneNumberInput";
 import VerificationCodeInput from "./VerificationCodeInput";
-import successImageUri from "../../../Res/success.png";
-import { primary } from "../../../Res/Colors";
 import CommonLayout from "../../CommonLayout";
 
 const initialState = {
@@ -89,7 +76,7 @@ export default () => {
     auth.signOut();
   }, []);
 
-  //production code
+  //==================production code -> Commented for static access============
 
   // useEffect(() => {
   //   if (active) {
@@ -119,6 +106,8 @@ export default () => {
     console.log("ph", phoneNumber);
     dispatch({ type: "setMsg", data: "Sending code ..." });
 
+    //==================production code -> Commented for static access============
+
     // auth
     //   .signInWithPhoneNumber(phoneNumber)
     //   .then(confirmResult => {
@@ -147,6 +136,7 @@ export default () => {
     const { codeInput, confirmResult, changeNumber } = state;
 
     console.log("state", state);
+
     //code for testing
     if (codeInput === "545121") {
       dispatch({ type: "setMsg", data: "Code Confirmed!" });
@@ -168,7 +158,7 @@ export default () => {
     //   codeInput
     // );
 
-    //production code
+    //==================production code -> Commented for static access============
 
     // if (confirmResult && codeInput.length > 0) {
     //   if (!changeNumber) {
@@ -210,7 +200,7 @@ export default () => {
 
   const onChangePhoneNumber = () => {
     const { user, phoneNumber } = data;
-
+    //Not in function right now
     firebase
       .auth()
       .verifyPhoneNumber(phoneNumber)
@@ -251,6 +241,7 @@ export default () => {
   };
 
   updatePhoneNumber = (verificationId, verificationCode) => {
+    //not in funtion right now
     const credential = firebase.auth.PhoneAuthProvider.credential(
       verificationId,
       verificationCode

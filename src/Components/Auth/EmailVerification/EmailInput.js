@@ -15,6 +15,7 @@ import { emailValidation } from "./../../../Utils/index";
 export default ({ email, setEmail, setMode, setServerOTP }) => {
   const [spin, setSpin] = useState(false);
 
+  //Calling a script for sending email OTP and getting a response form it
   const url = "https://clickdrive.herokuapp.com/verify?email=";
   const onNext = () => {
     if (emailValidation(email)) {

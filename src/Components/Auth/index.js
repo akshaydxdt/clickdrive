@@ -16,7 +16,9 @@ export default () => {
   actions.checkUser(auth);
   const { navigate } = useNavigation();
 
-  actions.fetchInstructors();
+  actions.fetchInstructors(); //for fetching instructors
+
+  //Bellow code is used for auto sign in
 
   // useEffect(() => {
   //   console.log("changed");

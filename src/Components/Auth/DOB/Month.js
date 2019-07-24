@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, Content } from "native-base";
 import { primary, primaryText, placeholderLight } from "../../../Res/Colors";
 
+//generate month names
 const getArray = () => {
   return [
     "Jan",
@@ -28,6 +29,7 @@ export default ({ setMonth, setActive }) => {
     }
   }, [value]);
 
+  //Individual component for days
   const Square = ({ item, setValue, active }) => {
     var value = item;
     const onSelect = () => {
@@ -51,6 +53,7 @@ export default ({ setMonth, setActive }) => {
 
   const months = getArray();
 
+  // this function generates each row for the grid
   const renderRow = (slicedArray, id) => {
     const items = slicedArray.map(item => (
       <Square
@@ -75,9 +78,11 @@ export default ({ setMonth, setActive }) => {
     );
   };
 
+  //generates the grid
   const renderGrid = () => {
     const rows = [];
     while (months.length) {
+      //slices the row with 3 Months in each
       rows.push(renderRow(months.splice(0, 3), rows.length));
     }
     return rows;

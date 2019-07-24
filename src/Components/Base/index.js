@@ -24,6 +24,8 @@ import {
   heightPercentageToDP as hp
 } from "react-native-responsive-screen";
 
+//this is a Base Layout used for lot of other components
+
 export default ({ children, footer }) => {
   const { navigate } = useNavigation();
 

@@ -56,7 +56,7 @@
 
 #### [`react-native-circular-progress`](https://github.com/bartgryszko/react-native-circular-progress)
 
-- Circular progress bar used in for may components.
+- Circular progress bar used in for many components.
 
 ## App features
 
@@ -100,3 +100,17 @@ This app serves two kinds of usecases : For students and instructors
 - Onboarding students
   - Students who are already enrolled with the instructor can be onboarded into the app with unlimited credits and those students can only book lessons from the instrutor that onboarded them.
   - The instructor can share a unique link to the students through Whatsapp and onboard them to the app.
+
+## Architecture
+
+The app is purely architected with React Hooks. So all the components are functional. And the global state mangement is implemented in a minimum and effective way. Global state mangement has been implemented in almost a similar pattern to redux. You can find the global states and actions associated with it in `src/GlobalHooks`. Each file contains an associated group of actions and it's individual states.
+
+You can access the state from any component by calling `useGlobal()` from `src/GlobalHooks`. It works with array destructuring and returns two objects: state and actions. `const [state,actions] = useGlobal()`. You can access the global state variables through the `state` object and actions through `actions` object
+
+## Navigation
+
+The app uses `react-navigation` for in-app navigation and deeplinking. Also, `react-navigation` provides it's own hooks for easier access to navigation from stateless components. You can use it this way
+
+> `const {navigate} = useNavigation()`\
+> You can use this navigation object to navigate to anywhere in the app \
+> `navigate('routeName')`

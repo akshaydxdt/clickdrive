@@ -15,6 +15,8 @@ import Base from "../../Base";
 import Card from "./Card";
 import { primary } from "../../../Res/Colors";
 
+//Generating profile listing for instructors
+
 export default () => {
   //const [instList, setInstList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,6 +70,7 @@ export default () => {
       <View
         style={{ flex: 1, alignItems: "center", justifyContent: "center " }}
       >
+        {/* =====================Code for tinder animation=================== */}
         {/* {loading ? (
           <Spinner color={primary} />
         ) : (

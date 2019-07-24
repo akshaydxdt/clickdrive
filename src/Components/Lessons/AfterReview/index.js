@@ -18,8 +18,11 @@ export default () => {
 
   const onNo = () => {
     setsatisfied(false);
+    //handle route and db if not satisfied
   };
-  const onYes = () => {};
+  const onYes = () => {
+    //handle route and if stisfied
+  };
 
   const onHandleReason = val => {
     setReason(val);

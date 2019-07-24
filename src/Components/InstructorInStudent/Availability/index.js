@@ -24,6 +24,8 @@ import { primaryText } from "../../../Res/Colors";
 //   </AvailabilityContextProvider>
 // );
 
+//================Availability time slots used for both instructor profile and also for setting instructor availability. The same component can be reused for both purposes
+
 export default () => {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -106,7 +108,7 @@ export default () => {
 
     console.log("slots", slots);
 
-    //checking continuity for atleast  1 hour
+    //===checking continuity for atleast  1 hour=====
     for (const [day, time] of entries) {
       time.map((item, index) => {
         console.log("item", item);
@@ -115,11 +117,8 @@ export default () => {
         var hourMod = currentItem.getHours() + 1;
         currentItem.setHours(hourMod);
         var comapreable = new Date("1970/01/01 " + time[index + 2]);
-        //currentModified.setHours(comapreable.getTime() + 1 * 60000);
-        console.log("current", currentItem, "compareable", comapreable);
 
         if (currentItem.getTime() === comapreable.getTime()) {
-          console.log("current", currentItem, "compareable", comapreable);
           oneHour = oneHour + 1;
         }
       });
@@ -127,7 +126,7 @@ export default () => {
 
     console.log("oneHour", oneHour);
     if (oneHour >= 1) {
-      //forward
+      //forward route
     } else {
       Toast.show({
         text: "There should be atleast 1 hour of continuity ",

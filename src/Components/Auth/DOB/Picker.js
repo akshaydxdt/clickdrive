@@ -18,12 +18,7 @@ export default () => {
   const { navigate } = useNavigation();
   const [state, actions] = useGlobal();
 
-  // useEffect(() => {
-  //   if (day != null || month != null || year != null) {
-  //     setActive(true);
-  //   }
-  // }, [day, month, year]);
-
+  //used for handling the page change and accordingly change the color of the button from inactive to active and vice-versa
   const onNext = () => {
     console.log("page", page);
 

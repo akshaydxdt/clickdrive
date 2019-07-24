@@ -25,7 +25,7 @@ export default () => {
     //     duration: 2000
     //   });
     // }
-
+    //temporary static code comparison
     if (code == "9081") {
       actions.setEmail(email);
       navigate("Pass");

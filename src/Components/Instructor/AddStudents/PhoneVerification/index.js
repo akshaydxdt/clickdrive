@@ -18,6 +18,7 @@ const initialState = {
   verificationId: ""
 };
 
+//reducer for handling multiple actions, refer useReducer from react docs
 const reducer = (state, action) => {
   switch (action.type) {
     case "phInput":

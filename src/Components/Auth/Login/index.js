@@ -13,6 +13,8 @@ export default () => {
   const [email, setEmail] = useState(null);
   const [pass, setPass] = useState(null);
 
+  //Fuction to Login the user and the navigate to Home page
+
   const onLogin = () => {
     if (email && pass) {
       if (emailValidation(email)) {

@@ -30,7 +30,7 @@ export default () => {
     if (state.instDetails != null) {
       navigate("Availability");
     } else {
-      navigate(""); //add route
+      navigate(""); //add route. if user details not available, redirect to adding user details
     }
   }, [state.user]);
 

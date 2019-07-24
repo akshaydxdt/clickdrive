@@ -57,10 +57,39 @@ export default class extends Component {
   };
 
   onUpload = () => {
-      //firebase.storage().ref('')
+    const {
+      bank,
+      liscense,
+      passportFront,
+      passportBack,
+      profilePhoto
+    } = this.state;
+
+    var uid = "uid"; //add id of the instructor
+    //uploading the docs
+    firebase
+      .database()
+      .ref("instructors")
+      .child(uid)
+      .set({
+        doc: {
+          bank,
+          liscense,
+          passportFront,
+          passportBack,
+          profilePhoto
+        }
+      });
   };
 
   render() {
+    const {
+      bank,
+      liscense,
+      passportFront,
+      passportBack,
+      profilePhoto
+    } = this.state;
     return (
       <Container>
         <Content>
@@ -74,30 +103,47 @@ export default class extends Component {
               <Left>
                 <Text>Bank Statement or Bank Card</Text>
               </Left>
-              <Image
-                source={this.state.bank}
-                style={{ width: 50, height: 50 }}
-              />
+              <Image source={bank} style={{ width: 50, height: 50 }} />
             </ListItem>
-            <ListItem>
+            <ListItem
+              onPress={() => {
+                this.onImagePick("liscense");
+              }}
+            >
               <Left>
                 <Text>Instructor license -Front</Text>
               </Left>
+              <Image source={liscense} style={{ width: 50, height: 50 }} />
             </ListItem>
-            <ListItem>
+            <ListItem
+              onPress={() => {
+                this.onImagePick("passportFront");
+              }}
+            >
               <Left>
                 <Text>Passport,ID Card -Front</Text>
               </Left>
+              <Image source={passportFront} style={{ width: 50, height: 50 }} />
             </ListItem>
-            <ListItem>
+            <ListItem
+              onPress={() => {
+                this.onImagePick("passportBack");
+              }}
+            >
               <Left>
                 <Text>Passport,ID Card -Back</Text>
               </Left>
+              <Image source={passportBack} style={{ width: 50, height: 50 }} />
             </ListItem>
-            <ListItem>
+            <ListItem
+              onPress={() => {
+                this.onImagePick("profilePhoto");
+              }}
+            >
               <Left>
                 <Text>Profile Photo</Text>
               </Left>
+              <Image source={profilePhoto} style={{ width: 50, height: 50 }} />
             </ListItem>
           </List>
           <Button onPress={this.onUpload}>

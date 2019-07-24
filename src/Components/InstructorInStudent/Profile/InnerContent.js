@@ -7,6 +7,8 @@ import { useNavigation } from "react-navigation-hooks";
 import firebase from "react-native-firebase";
 import { useGlobal } from "../../../GlobalHooks";
 
+//For the user to select avialable slots fromthe instructor
+
 export default () => {
   const availability = {
     Fri: [
@@ -100,7 +102,7 @@ export default () => {
   useEffect(() => {
     generateData();
   }, []);
-
+  //Fn to generate current week and time slots based on the instructor
   const generateData = () => {
     const currentWeek = getCurrentWeek();
 

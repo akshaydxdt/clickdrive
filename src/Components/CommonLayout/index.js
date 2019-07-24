@@ -6,6 +6,8 @@ import {
 } from "react-native-responsive-screen";
 import { primary } from "../../Res/Colors";
 
+//Commont layout used for almost every component
+
 export default ({ children }) => {
   return (
     <Container style={{ backgroundColor: primary }}>

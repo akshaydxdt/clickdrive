@@ -28,23 +28,7 @@ export default ({
     setCode(otp);
   }, [otp]);
 
-  // const getOTP = async () => {
-  //   console.log("fn call");
-
-  //   const unsub = firebase
-  //     .database()
-  //     .ref("emailVerification")
-  //     .child(email.replace(".", "_"));
-
-  //   var snap = await unsub.once("value", snapShot => {
-  //     return snapShot.val();
-  //   });
-  //   console.log("snap", snap.otp);
-
-  //   setServerOTP(snap.otp);
-
-  // };
-
+  //rendering each individual input
   const renderInputs = () => {
     const inputs = Array(4).fill(0);
     const txt = inputs.map((i, j) => (

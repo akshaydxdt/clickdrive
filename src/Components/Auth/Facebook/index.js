@@ -11,13 +11,14 @@ export default () => {
 
   onLogin = async () => {
     try {
+      //DOB can only be obtained from fb for approved apps
       const result = await LoginManager.logInWithReadPermissions([
         "public_profile",
         "email"
       ]);
 
       if (result.isCancelled) {
-        // handle this however suites the flow of your app
+        // handle this however suites the flow of the app
         throw new Error("User cancelled request");
       }
 
@@ -29,7 +30,7 @@ export default () => {
       const data = await AccessToken.getCurrentAccessToken();
 
       if (!data) {
-        // handle this however suites the flow of your app
+        // handle this however suites the flow of the app
         throw new Error(
           "Something went wrong obtaining the users access token"
         );
@@ -46,7 +47,9 @@ export default () => {
         .signInWithCredential(credential);
       const user = firebaseUserCredential.user;
 
+      //set the user data to global state
       actions.setUser(user);
+
       navigate("PhoneVerification", { from: "fb" });
     } catch (e) {
       console.error(e);
@@ -54,10 +57,7 @@ export default () => {
   };
 
   onLogout = () => {
-    // dispatch({
-    //   type: "userActive",
-    //   user: null
-    // });
+    //funtion if logout should be inplemented
   };
   return (
     <Button

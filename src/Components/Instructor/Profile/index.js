@@ -5,6 +5,8 @@ import firebase from "react-native-firebase";
 import ImagePicker from "react-native-image-picker";
 import { AirbnbRating } from "react-native-ratings";
 
+//Profile editing page
+
 const options = {
   title: "Select Image",
   storageOptions: {
@@ -61,6 +63,7 @@ export default class extends Component {
 
   onAddDescription = () => {
     const { id, desc } = this.state;
+    //Currently only adding description, add as an object to set all data
     firebase
       .database()
       .ref("instructors")
