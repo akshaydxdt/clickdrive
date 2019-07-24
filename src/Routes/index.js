@@ -27,6 +27,7 @@ import Terms from "../Components/Auth/Terms";
 import Matching from "../Components/Matching";
 import MatchSuccess from "../Components/Matching/MatchSuccess";
 import SelectSuccess from "../Components/InstructorInStudent/InstructorList/SelectSuccess";
+import Calendar from "../Calendar";
 
 // navigationOptions: {
 //   headerStyle: {
@@ -136,10 +137,16 @@ const AppNavigator = createStackNavigator(
       navigationOptions: {
         header: null
       }
+    },
+    Calendar: {
+      screen: Calendar,
+      navigationOptions: {
+        header: null
+      }
     }
   },
   {
-    initialRouteName: "Auth"
+    initialRouteName: "Calendar"
   }
 );
 
