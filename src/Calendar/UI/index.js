@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Content, Grid } from "native-base";
 import Picker from "./Picker";
 import { primary } from "../../Res/Colors";
+import { useStore } from "../Hooks";
 
 export default () => {
   return (

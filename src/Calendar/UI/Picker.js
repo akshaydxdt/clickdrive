@@ -6,7 +6,8 @@ import { useNavigation } from "react-navigation-hooks";
 import Day from "./Day";
 import Month from "./Month";
 import Year from "./Year";
-import { useGlobal } from "./../../GlobalHooks/index";
+import { useStore } from "../Hooks";
+import { generateYears } from "../Utils/date";
 
 export default () => {
   const [date, setDate] = useState(null);
@@ -16,16 +17,13 @@ export default () => {
   const [page, setPage] = useState(0);
   const [active, setActive] = useState(false);
 
-  const { navigate } = useNavigation();
-  const [state, actions] = useGlobal();
-
   //used for handling the page change and accordingly change the color of the button from inactive to active and vice-versa
   const onNext = () => {
     console.log("page", page);
 
     switch (page) {
       case 0:
-        day ? setPage(page => page + 1) : setPage(page);
+        year ? setPage(page => page + 1) : setPage(page);
         setActive(false);
         break;
       case 1:
@@ -33,7 +31,7 @@ export default () => {
         setActive(false);
         break;
       case 2:
-        year ? onDateChange() : setPage(page);
+        day ? onDateChange() : setPage(page);
         setActive(false);
         break;
       default:
@@ -47,9 +45,7 @@ export default () => {
     if (day && month && year) {
       var date = day + "-" + month + "-" + year;
 
-      actions.setDOB(date);
       setDate(date);
-      navigate("Personalinfo");
     } else {
       Toast.show({
         text: "Please select a complete date",
@@ -60,7 +56,12 @@ export default () => {
   };
 
   return (
-    <Col style={{ alignItems: "center" }}>
+    <Col
+      style={{
+        alignItems: "center",
+        flex: 1
+      }}
+    >
       <Text style={{ color: primaryText, marginBottom: 27 }}>
         Enter your date of birth
       </Text>
@@ -79,9 +80,9 @@ export default () => {
             backgroundColor: primary
           }}
           activeTabStyle={{ backgroundColor: primary }}
-          heading="DD"
+          heading="YY"
         >
-          <Day setDay={setDay} setActive={setActive} />
+          <Year setYear={setYear} setActive={setActive} />
         </Tab>
         <Tab
           tabStyle={{
@@ -97,9 +98,9 @@ export default () => {
             backgroundColor: primary
           }}
           activeTabStyle={{ backgroundColor: primary }}
-          heading="YY"
+          heading="DD"
         >
-          <Year setYear={setYear} setActive={setActive} />
+          <Day setDay={setDay} setActive={setActive} />
         </Tab>
       </Tabs>
 

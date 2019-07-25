@@ -1,23 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { View, Text, Button, Content } from "native-base";
+import React, { useState, useEffect, useReducer } from "react";
+import { View, Text, Button, Content, Icon } from "native-base";
 import { primary, primaryText, placeholderLight } from "../../Res/Colors";
+import { generateYears } from "./../Utils/date";
 
 //generate the past 18 years
-const getArray = () => {
-  const getYears = startYear => {
-    var currentYear = new Date().getFullYear() - 17,
-      years = [];
-    startYear = startYear || 1979;
-    while (startYear <= currentYear) {
-      years.push(startYear++);
-    }
-    return years.reverse();
-  };
-  return getYears();
+
+const initialState = {
+  years: null
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "setYears":
+      return { ...state, years: action.data };
+    default:
+      throw new Error();
+  }
 };
 
 export default ({ setYear, setActive }) => {
   const [value, setValue] = useState(null);
+  //const [years, setYears] = useState(null);
+  const [next, setNext] = useState(0);
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const years = state.years;
+
+  useEffect(() => {
+    getNextArray();
+  }, [next]);
 
   useEffect(() => {
     if (value) {
@@ -25,7 +37,29 @@ export default ({ setYear, setActive }) => {
     }
   }, [value]);
 
-  const years = getArray();
+  const getArray = () => {
+    var currentYear = new Date().getFullYear(),
+      years = [],
+      startYear;
+
+    startYear = currentYear - 18;
+    while (startYear < currentYear) {
+      years.push(startYear++);
+    }
+    console.log("years", years);
+    //setYears(years.reverse());
+    dispatch({ type: "setYears", data: years.reverse() });
+  };
+
+  const getNextArray = () => {
+    var newYears = [];
+
+    var currentYear = new Date().getFullYear() - 18 * next;
+    for (let k = 1; k < 19; k++) {
+      newYears.push(currentYear - k);
+    }
+    dispatch({ type: "setYears", data: newYears });
+  };
 
   //Individual component for Years
   const Square = ({ item, setValue, active }) => {
@@ -75,10 +109,15 @@ export default ({ setYear, setActive }) => {
 
   const renderGrid = () => {
     const rows = [];
-    while (years.length) {
-      //slices the row with 3 years in each
-      rows.push(renderRow(years.splice(0, 3), rows.length));
+
+    if (years) {
+      var temp = [...years];
+      while (temp.length) {
+        //slices the row with 3 years in each
+        rows.push(renderRow(temp.splice(0, 3), rows.length));
+      }
     }
+
     return rows;
   };
 
@@ -88,10 +127,42 @@ export default ({ setYear, setActive }) => {
       style={{ flex: 1 }}
       contentContainerStyle={{
         backgroundColor: primary,
-        paddingTop: 28
+        paddingTop: 28,
+        flex: 1,
+        minHeight: "100%"
       }}
     >
       {renderGrid()}
+      {years ? (
+        <View
+          style={{
+            flex: 1,
+            flexDirection: "row",
+            alignSelf: "flex-end",
+            width: "100%",
+            justifyContent: "space-between"
+          }}
+        >
+          <Icon
+            onPress={() => {
+              if (next > 0) {
+                setNext(next => next - 1);
+              }
+            }}
+            type="FontAwesome"
+            name="angle-double-left"
+            style={{ color: next > 0 ? "white" : "rgba(255, 255, 255, 0.6)" }}
+          />
+          <Icon
+            onPress={() => {
+              setNext(next => next + 1);
+            }}
+            type="FontAwesome"
+            name="angle-double-right"
+            style={{ color: "white" }}
+          />
+        </View>
+      ) : null}
     </Content>
   );
 };
