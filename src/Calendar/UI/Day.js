@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, Button, Content } from "native-base";
 import { primary, primaryText, placeholderLight } from "../../Res/Colors";
 
-//generate days from 1 to 31
-const getArray = () => {
-  return [...Array(31).keys()];
-};
-
-export default ({ setDay, setActive }) => {
+export default ({ setDay, setActive, month }) => {
   const [value, setValue] = useState(null);
 
   useEffect(() => {
@@ -15,6 +10,20 @@ export default ({ setDay, setActive }) => {
       setDay(value);
     }
   }, [value]);
+
+  //generate days based on months
+  const getArray = () => {
+    switch (month) {
+      // case "Jan","Mar","May","Jul","Sep","Nov":
+      //   return [...Array(31).keys()];
+      case "Feb":
+        return [...Array(28).keys()];
+      case ("Apr", "Jun", "Aug", "Oct", "Dec"):
+        return [...Array(30).keys()];
+      default:
+        return [...Array(31).keys()];
+    }
+  };
 
   //Individual component for days
   const Square = ({ item, setValue, active }) => {

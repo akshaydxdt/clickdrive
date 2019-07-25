@@ -20,7 +20,7 @@ const reducer = (state, action) => {
 
 export default ({ setYear, setActive }) => {
   const [value, setValue] = useState(null);
-  //const [years, setYears] = useState(null);
+
   const [next, setNext] = useState(0);
 
   const [state, dispatch] = useReducer(reducer, initialState);

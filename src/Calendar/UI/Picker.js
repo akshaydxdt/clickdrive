@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Col, Text, Button, Tabs, Tab, Toast } from "native-base";
 import { primaryText, primary, placeholderLight } from "../../Res/Colors";
-import { useNavigation } from "react-navigation-hooks";
-
 import Day from "./Day";
 import Month from "./Month";
 import Year from "./Year";
-import { useStore } from "../Hooks";
-import { generateYears } from "../Utils/date";
 
 export default () => {
   const [date, setDate] = useState(null);
@@ -100,7 +96,7 @@ export default () => {
           activeTabStyle={{ backgroundColor: primary }}
           heading="DD"
         >
-          <Day setDay={setDay} setActive={setActive} />
+          <Day setDay={setDay} setActive={setActive} month={month} />
         </Tab>
       </Tabs>
 
