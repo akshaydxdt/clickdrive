@@ -58,6 +58,10 @@
 
 - Circular progress bar used in for many components.
 
+#### [`react-native-fbsdk`](https://github.com/facebook/react-native-fbsdk)
+
+- Facebook SDK for facebook login **[ iOS integration required ]**
+
 ## App features
 
 This app serves two kinds of usecases : For students and instructors
