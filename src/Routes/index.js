@@ -146,7 +146,7 @@ const AppNavigator = createStackNavigator(
     }
   },
   {
-    initialRouteName: "Calendar"
+    initialRouteName: "Auth"
   }
 );
 
