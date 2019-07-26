@@ -36,20 +36,6 @@ export default ({ setYear, setActive }) => {
     }
   }, [value]);
 
-  const getArray = () => {
-    var currentYear = new Date().getFullYear(),
-      years = [],
-      startYear;
-
-    startYear = currentYear - 18;
-    while (startYear < currentYear) {
-      years.push(startYear++);
-    }
-    console.log("years", years);
-    //setYears(years.reverse());
-    dispatch({ type: "setYears", data: years.reverse() });
-  };
-
   const getNextArray = () => {
     var newYears = [];
 

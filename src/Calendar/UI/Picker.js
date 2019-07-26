@@ -42,11 +42,8 @@ export default ({ onChange }) => {
   };
 
   const onDateChange = () => {
-    console.log("date:", day, month, year);
-
     if (day && month && year) {
       var date = day + "-" + month + "-" + year;
-
       setDate(date);
     } else {
       Toast.show({
