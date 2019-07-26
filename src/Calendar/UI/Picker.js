@@ -5,7 +5,7 @@ import Day from "./Day";
 import Month from "./Month";
 import Year from "./Year";
 
-export default ({ onChange }) => {
+export default ({ onChange, onError }) => {
   const [date, setDate] = useState(null);
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
@@ -46,11 +46,7 @@ export default ({ onChange }) => {
       var date = day + "-" + month + "-" + year;
       setDate(date);
     } else {
-      Toast.show({
-        text: "Please select a complete date",
-        duration: 2000,
-        buttonText: "Okay"
-      });
+      onError();
     }
   };
 
@@ -104,7 +100,7 @@ export default ({ onChange }) => {
         light
         bordered
         style={{
-          marginBottom: 50,
+          marginBottom: 20,
           width: "100%",
           alignSelf: "flex-end",
           justifyContent: "center",
