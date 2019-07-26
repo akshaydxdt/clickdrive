@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, Button, Content } from "native-base";
-import { primary, primaryText, placeholderLight } from "../../Res/Colors";
+import { primary, primaryText, placeholderLight } from "../Utils/Colors";
 
 export default ({ setDay, setActive, month }) => {
   const [value, setValue] = useState(null);

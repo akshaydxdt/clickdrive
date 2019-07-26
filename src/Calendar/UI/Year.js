@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { View, Text, Button, Content, Icon } from "native-base";
-import { primary, primaryText, placeholderLight } from "../../Res/Colors";
-import { generateYears } from "./../Utils/date";
+import { primary, primaryText, placeholderLight } from "../Utils/Colors";
 
 //generate the past 18 years
 

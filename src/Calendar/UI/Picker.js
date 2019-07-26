@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Col, Text, Button, Tabs, Tab, Toast } from "native-base";
-import { primaryText, primary, placeholderLight } from "../../Res/Colors";
+import { primaryText, primary, placeholderLight } from "../Utils/Colors";
 import Day from "./Day";
 import Month from "./Month";
 import Year from "./Year";
 
-export default () => {
+export default ({ onChange }) => {
   const [date, setDate] = useState(null);
   const [day, setDay] = useState(null);
   const [month, setMonth] = useState(null);
   const [year, setYear] = useState(null);
   const [page, setPage] = useState(0);
   const [active, setActive] = useState(false);
+
+  useEffect(() => {
+    if (date) {
+      onChange(date);
+    }
+  }, [date]);
 
   //used for handling the page change and accordingly change the color of the button from inactive to active and vice-versa
   const onNext = () => {
@@ -58,9 +64,6 @@ export default () => {
         flex: 1
       }}
     >
-      <Text style={{ color: primaryText, marginBottom: 27 }}>
-        Enter your date of birth
-      </Text>
       <Tabs
         page={page}
         tabBarUnderlineStyle={{
@@ -104,7 +107,7 @@ export default () => {
         light
         bordered
         style={{
-          marginBottom: 20,
+          marginBottom: 50,
           width: "100%",
           alignSelf: "flex-end",
           justifyContent: "center",

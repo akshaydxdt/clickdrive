@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Item,
   Input,
@@ -7,13 +7,24 @@ import {
   Text,
   Toast,
   Spinner,
-  Grid
+  Grid,
+  View,
+  Image
 } from "native-base";
-import { primaryText, placeholderLight } from "../../../Res/Colors";
+import { primaryText, placeholderLight, primary } from "../../../Res/Colors";
 import { emailValidation } from "./../../../Utils/index";
 
 export default ({ email, setEmail, setMode, setServerOTP }) => {
   const [spin, setSpin] = useState(false);
+  const [sent, setSent] = useState(false);
+  useEffect(() => {
+    if (sent) {
+      const timer = setTimeout(() => {
+        setMode("codeInput");
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [sent]);
 
   //Calling a script for sending email OTP and getting a response form it
   const url = "https://clickdrive.herokuapp.com/verify?email=";
@@ -38,7 +49,7 @@ export default ({ email, setEmail, setMode, setServerOTP }) => {
 
             setServerOTP(data.otp);
             setSpin(false);
-            setMode("codeInput");
+            setSent(true);
           })
           .catch(error => {
             console.log("error", error);
@@ -56,46 +67,84 @@ export default ({ email, setEmail, setMode, setServerOTP }) => {
       });
     }
   };
-  return (
-    <Grid style={{ alignItems: "center" }}>
-      <Col>
-        <Item>
-          <Input
-            style={{ color: primaryText, fontFamily: "Lato-Regular" }}
-            placeholderTextColor={placeholderLight}
-            placeholder={"Enter your email ID"}
-            value={email}
-            onChangeText={value => setEmail(value)}
-          />
-        </Item>
-
-        <Button
-          light
-          bordered
-          disabled={email ? false : true}
+  if (sent) {
+    return (
+      <View
+        style={{
+          flex: 1,
+          padding: 15,
+          justifyContent: "center",
+          alignItems: "center",
+          flex: 1,
+          backgroundColor: primary
+        }}
+      >
+        <Text
           style={{
-            marginTop: 40,
-            alignSelf: "stretch",
-            justifyContent: "center",
-            borderRadius: 15
+            fontSize: 20,
+            color: "white",
+            fontFamily: "Lato-Regular",
+            marginBottom: 25,
+            textAlign: "center"
           }}
-          onPress={onNext}
         >
-          {spin ? (
-            <Spinner color={primaryText} />
-          ) : (
-            <Text
-              style={{
-                color: email ? primaryText : placeholderLight,
-                fontFamily: "Lato-Regular"
-              }}
-              uppercase={false}
-            >
-              Continue
-            </Text>
-          )}
-        </Button>
-      </Col>
-    </Grid>
-  );
+          We have sent a confirmation code to
+        </Text>
+        <Text
+          style={{
+            fontSize: 20,
+            color: "white",
+            fontFamily: "Lato-Regular",
+
+            textAlign: "center"
+          }}
+        >
+          {email}
+        </Text>
+      </View>
+    );
+  } else {
+    return (
+      <Grid style={{ alignItems: "center" }}>
+        <Col>
+          <Item>
+            <Input
+              style={{ color: primaryText, fontFamily: "Lato-Regular" }}
+              placeholderTextColor={placeholderLight}
+              placeholder={"Enter your email ID"}
+              value={email}
+              onChangeText={value => setEmail(value)}
+            />
+          </Item>
+
+          <Button
+            light
+            bordered
+            disabled={email ? false : true}
+            style={{
+              marginTop: 40,
+              alignSelf: "stretch",
+              justifyContent: "center",
+              borderRadius: 15
+            }}
+            onPress={onNext}
+          >
+            {spin ? (
+              <Spinner color={primaryText} />
+            ) : (
+              <Text
+                style={{
+                  color: email ? primaryText : placeholderLight,
+                  fontFamily: "Lato-Regular"
+                }}
+                uppercase={false}
+              >
+                Continue
+              </Text>
+            )}
+          </Button>
+        </Col>
+      </Grid>
+    );
+  }
 };
